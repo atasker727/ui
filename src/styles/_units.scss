@@ -1,0 +1,9 @@
+$header-height: 10vh;
+$footer-height: 5vh;
+
+$nav-width-expanded: 200px;
+$nav-width-collapsed: 40px;
+
+$body-height: calc(100vh - $header-height - $footer-height);
+$body-width-min: calc(100vw - $nav-width-expanded);
+$body-width-max: calc(100vw - $nav-width-collapsed);

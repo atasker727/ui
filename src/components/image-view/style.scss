@@ -1,0 +1,15 @@
+@use '@/styles/image-sizes' as sizes;
+
+$carousel-button-size: 28px;
+$carousel-button-x-offset: $carousel-button-size + 16px;
+
+.image-view-container {
+  &.size-preview img {
+    height: sizes.$preview-height;
+    width: sizes.$preview-width;
+  }
+  &.size-fullsize img {
+    height: sizes.$fullsize-height;
+    width: sizes.$fullsize-width;
+  }
+}

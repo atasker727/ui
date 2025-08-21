@@ -1,0 +1,64 @@
+@use '@/styles/colors' as colors;
+@use '@/styles/image-sizes' as sizes;
+
+$carousel-button-size-internal: 28px;
+// accounting for the border
+$carousel-button-size-external: 32px;
+$carousel-button-offset: 8px;
+$carousel-button-left-offset: $carousel-button-offset;
+$carousel-button-right-offset: calc($carousel-button-size-external * 2) + $carousel-button-offset;
+
+.image-carousel-container {
+  // z-index: -1;;
+  &--preview {
+    height: sizes.$preview-height;
+    width: sizes.$preview-width;
+  }
+
+  &--fullsize {
+    height: sizes.$fullsize-height;
+    width: sizes.$fullsize-width;
+  }
+
+  .image--visible {
+    display: block;
+  }
+  .image--hidden {
+    display: none;
+  }
+  .image-view-container {
+    transform: translateX(-$carousel-button-size-external);
+  }
+
+  &::before,
+  &::after {
+    z-index: 1;
+    opacity: 60%;
+    border: 2px solid colors.$light-grey;
+    font-weight: 1000;
+    color: colors.$light-grey;
+    border-radius: $carousel-button-size-internal;
+    width: $carousel-button-size-internal;
+    height: $carousel-button-size-internal;
+    min-width: $carousel-button-size-internal;
+
+    text-align: center;
+    margin: auto 0;
+    cursor: pointer;
+    visibility: hidden;
+  }
+  &::before {
+    content: '<';
+    transform: translateX($carousel-button-left-offset);
+  }
+  &::after {
+    content: '>';
+    transform: translateX(-$carousel-button-right-offset);
+  }
+  &:hover {
+    &::before,
+    &::after {
+      visibility: visible;
+    }
+  }
+}

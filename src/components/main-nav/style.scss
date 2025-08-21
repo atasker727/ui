@@ -1,0 +1,33 @@
+@use '../../styles' as *;
+
+.main-nav {
+  height: $body-height;
+
+  min-width: $nav-width-collapsed;
+  max-width: $nav-width-expanded;
+
+  display: flex;
+  flex-direction: column;
+
+  .nav-item {
+    padding: 0.5em 1em;
+    text-align: center;
+    cursor: pointer;
+
+    border-bottom: 1px solid $bg-blue-grey;
+    font-size: 0.95em;
+    color: $dark-grey;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $bg-blue-grey;
+    }
+  }
+
+  .nav-toggle-button {
+    margin-top: auto;
+  }
+}
