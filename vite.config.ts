@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import sass from 'sass'
 
+console.log(process.env);
+
 export default {
     plugins: [react()],
     resolve: {
@@ -18,7 +20,7 @@ export default {
       },
     },
     server: {
-      allowedHosts: ['localhost', 'http://nasa-vis-ui.onrender.com'],
+      allowedHosts: ['nasa-vis-ui-static.onrender.com'],
       port: process.env.VITE_APP_PORT,
       proxy: {
         [process.env.VITE_API_PREFIX ?? '/api']: new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin,
