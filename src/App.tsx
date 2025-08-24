@@ -20,10 +20,10 @@ function App() {
       <MainNav navItems={navItems} isNavExpanded={isNavExpanded} setIsNavExpanded={setIsNavExpanded} />
       <MainContent>
         <>
-          {/* <ImageCarousel sizeType="preview" /> */}
+          <ImageCarousel sizeType="preview" />
           {/* <Modal />
           <button /> */}
-          <ImageCarousel sizeType="fullsize" />
+          {/* <ImageCarousel sizeType="fullsize" /> */}
         </>
       </MainContent>
     </div>

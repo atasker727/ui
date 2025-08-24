@@ -2,20 +2,15 @@ import type {
   cancellableRequestClassType,
   cancellableRequestBase,
   cancelRequestFunctionType,
-} from "../types/cancellableRequests";
+} from '../types/cancellableRequests';
 
-export {
-  getFullURLWithParams,
-  cancellableRequestGet,
-  cancellableRequestPost,
-  cancellableRequestDelete,
-};
+export { getFullURLWithParams, cancellableRequestGet, cancellableRequestPost, cancellableRequestDelete };
 
 async function _handleRequestCodes(res: Response) {
   if (!res.ok) {
     // error handling for codes like 503 here
     console.log(res);
-    return Promise.reject(new Error("bad response"));
+    return Promise.reject(new Error('bad response'));
   }
 
   return await res.json();
@@ -26,9 +21,7 @@ function _handlePromiseErrorCatch(err: Error) {
 }
 
 function addURLParams(endpoint: string, params = {}): string {
-  return Object.entries(params).length > 0
-    ? `${endpoint}?${new URLSearchParams(params)}`
-    : endpoint;
+  return Object.entries(params).length > 0 ? `${endpoint}?${new URLSearchParams(params)}` : endpoint;
 }
 
 function getFullURLWithParams(endpoint: string, params = {}): string {
@@ -40,15 +33,10 @@ function getFullURLWithParams(endpoint: string, params = {}): string {
   return url.href;
 }
 
-async function HTTPRequest(
-  url: string,
-  method = "GET",
-  body: null | object = {},
-  signal: AbortSignal | null = null,
-) {
+async function HTTPRequest(url: string, method = 'GET', body: null | object = {}, signal: AbortSignal | null = null) {
   try {
     const headers = {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     };
 
     const params = {
@@ -57,20 +45,14 @@ async function HTTPRequest(
       ...(body && { body: JSON.stringify(body) }),
       ...(signal && { signal }),
     };
-    return await fetch(url, params)
-      .then(_handleRequestCodes)
-      .catch(_handlePromiseErrorCatch);
+    return await fetch(url, params).then(_handleRequestCodes).catch(_handlePromiseErrorCatch);
   } catch (err) {
     console.error(err);
     return Promise.reject(err);
   }
 }
 
-function cancellableJSONRequest(
-  url: string,
-  method = "GET",
-  requestBody?: null | object,
-): cancellableRequestBase {
+function cancellableJSONRequest(url: string, method = 'GET', requestBody?: null | object): cancellableRequestBase {
   try {
     const controller = new AbortController();
 
@@ -81,11 +63,9 @@ function cancellableJSONRequest(
 
     const { signal } = controller;
 
-    const responsePromise = HTTPRequest(url, method, requestBody, signal).then(
-      (res) => {
-        return res;
-      },
-    );
+    const responsePromise = HTTPRequest(url, method, requestBody, signal).then((res) => {
+      return res;
+    });
     return { responsePromise, cancelRequest };
   } catch (err) {
     console.error(err);
@@ -101,11 +81,7 @@ class CancellableRequestClass implements cancellableRequestClassType {
   finally: (callback: () => void) => Promise<unknown>;
 
   constructor(url: string, method: string, requestBody?: object | null) {
-    const { responsePromise, cancelRequest } = cancellableJSONRequest(
-      url,
-      method,
-      requestBody,
-    );
+    const { responsePromise, cancelRequest } = cancellableJSONRequest(url, method, requestBody);
     this.responsePromise = responsePromise;
     this.cancelRequest = cancelRequest;
 
@@ -121,23 +97,14 @@ class CancellableRequestClass implements cancellableRequestClassType {
   }
 }
 
-function cancellableRequestGet(
-  url: string,
-  params = {},
-): cancellableRequestClassType {
-  return new CancellableRequestClass(addURLParams(url, params), "GET", null);
+function cancellableRequestGet(url: string, params = {}): cancellableRequestClassType {
+  return new CancellableRequestClass(addURLParams(url, params), 'GET', null);
 }
 
-function cancellableRequestPost(
-  url: string,
-  requestBody = {},
-): cancellableRequestClassType {
-  return new CancellableRequestClass(url, "POST", requestBody);
+function cancellableRequestPost(url: string, requestBody = {}): cancellableRequestClassType {
+  return new CancellableRequestClass(url, 'POST', requestBody);
 }
 
-function cancellableRequestDelete(
-  url: string,
-  requestBody = {},
-): cancellableRequestClassType {
-  return new CancellableRequestClass(url, "DELETE", requestBody);
+function cancellableRequestDelete(url: string, requestBody = {}): cancellableRequestClassType {
+  return new CancellableRequestClass(url, 'DELETE', requestBody);
 }
