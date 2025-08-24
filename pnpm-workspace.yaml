@@ -1,4 +1,1 @@
 overrides:
-  common: link:../../.local/share/pnpm/global/5/node_modules/common
-  common-file: link:../common
-  common-files: link:../common

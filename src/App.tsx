@@ -1,16 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import MainNav from '@/components/main-nav/MainNav.tsx';
 import MainContent from '@/components/main-content/MainContent.tsx';
 // import ImageView from '@/components/image-view/imageView';
 import ImageCarousel from './components/image-carousel/imageCarousel';
-
-// import print from '@/helpers/print.tsx'
+// import Modal from '@/components/modal/modal';
 
 function App() {
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-
-  // const reqId = useRef(1);
 
   const navItems: { title: string; link: string }[] = [
     { title: 'Home', link: '/' },
@@ -22,8 +19,12 @@ function App() {
     <div className={`application-container ${isNavExpanded ? 'nav-expanded' : 'nav-collapsed'}`}>
       <MainNav navItems={navItems} isNavExpanded={isNavExpanded} setIsNavExpanded={setIsNavExpanded} />
       <MainContent>
-        <ImageCarousel sizeType="preview" />
-        {/* <ImageCarousel sizeType="fullsize" /> */}
+        <>
+          {/* <ImageCarousel sizeType="preview" /> */}
+          {/* <Modal />
+          <button /> */}
+          <ImageCarousel sizeType="fullsize" />
+        </>
       </MainContent>
     </div>
   );
