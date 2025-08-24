@@ -3,7 +3,6 @@ import { type PhotoOfTheDay } from '@/common/types/photoOfTheDay.d';
 // import { type cancellableRequestClassType } from '@/common/types/cancellableRequests';
 import { cancellableRequestGet } from '@/common/utils/requestsCore';
 
-
 export function useHooks() {
   const [shownImageId, setShownImageId] = useState('');
   const [images, setImages] = useState<PhotoOfTheDay[] | null>(null);
@@ -12,7 +11,9 @@ export function useHooks() {
     // const params = { date: '2025-01-01' };
     const params = { start_date: '2025-01-01', end_date: '2025-01-02' };
 
-    const photosRequest = cancellableRequestGet('/api/photo-of-the-day', params)
+    const photosRequest = cancellableRequestGet('/api/photo-of-the-day', params);
+
+    photosRequest
       .then((response) => {
         const typedResponse = response as { photos: PhotoOfTheDay[] };
         if (typedResponse && typedResponse.photos) {

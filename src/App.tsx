@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import MainNav from '@/components/main-nav/MainNav.tsx';
 import MainContent from '@/components/main-content/MainContent.tsx';

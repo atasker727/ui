@@ -4,7 +4,7 @@ import './style.scss';
 interface MainNavProps {
   navItems: { title: string; link: string }[];
   isNavExpanded: boolean;
-  setIsNavExpanded: Function;
+  setIsNavExpanded: (newVal: boolean) => void;
 }
 
 export default function MainNav({ navItems, isNavExpanded, setIsNavExpanded }: MainNavProps): JSX.Element {

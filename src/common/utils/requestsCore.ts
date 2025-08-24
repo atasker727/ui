@@ -110,19 +110,14 @@ class CancellableRequestClass implements cancellableRequestClassType {
     this.cancelRequest = cancelRequest;
 
     this.then = function (callback) {
-      this.responsePromise.then(callback);
-      return this;
+      return this.responsePromise.then(callback);
     };
     this.catch = function (callback) {
-      this.responsePromise.catch(callback);
-      return this;
+      return this.responsePromise.catch(callback);
     };
     this.finally = function (callback) {
-      this.responsePromise.finally(callback);
-      return this;
+      return this.responsePromise.finally(callback);
     };
-
-    return this;
   }
 }
 
