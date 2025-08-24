@@ -18,7 +18,7 @@ export default {
       },
     },
     server: {
-      allowedHosts: 'nasa-vis-ui.onrender.com',
+      allowedHosts: ['localhost', 'nasa-vis-ui.onrender.com'],
       port: process.env.VITE_APP_PORT,
       proxy: {
         [process.env.VITE_API_PREFIX ?? '/api']: new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin,
