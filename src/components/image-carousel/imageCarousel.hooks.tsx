@@ -11,7 +11,7 @@ export function useHooks() {
     // const params = { date: '2025-01-01' };
     const params = { start_date: '2025-01-01', end_date: '2025-01-02' };
 
-    const photosRequest = cancellableRequestGet(`${process.env.VITE_BACKEND_URL}/api/photo-of-the-day`, params);
+    const photosRequest = cancellableRequestGet('/api/photo-of-the-day', params);
 
     photosRequest
       .then((response) => {
