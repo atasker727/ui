@@ -4,17 +4,20 @@ import './style.scss';
 import ImageView from '../image-view/imageView';
 import { useHooks } from './imageCarousel.hooks.tsx';
 import nextId from 'react-id-generator';
+import type { ALLOWED_PHOTO_TYPES } from '@/common/types/photoTypes.js';
 
 export default function ImageCarousel({
+  photoType,
   sizeType,
 }: {
   className?: string;
+  photoType: ALLOWED_PHOTO_TYPES;
   sizeType: 'fullsize' | 'preview';
 }): JSX.Element {
   const sizeClass = sizeType === 'preview' ? 'image-carousel-container--preview' : 'image-carousel-container--fullsize';
 
   const carouselId = nextId('carousel-');
-  const { shownImageId, setShownImageId, images } = useHooks();
+  const { shownImageId, setShownImageId, images } = useHooks(photoType);
 
   const handleCarouselArrowClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = e.target as HTMLElement;

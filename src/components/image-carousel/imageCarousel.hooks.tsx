@@ -1,19 +1,30 @@
 import { useState, useEffect } from 'react';
-import { type PhotoOfTheDay } from '@/common/types/photoOfTheDay.d';
-// import { type cancellableRequestClassType } from '@/common/types/cancellableRequests';
+import type { PhotoOfTheDay, ALLOWED_PHOTO_TYPES } from '@/common/types/photoTypes';
 import { cancellableRequestGet } from '@/common/utils/requestsCore';
-const backend_url = import.meta.env.VITE_BACKEND_URL
+// const backend_url = import.meta.env.VITE_BACKEND_URL
+// console.log(import.meta);
 
-
-export function useHooks() {
+export function useHooks(type: ALLOWED_PHOTO_TYPES) {
   const [shownImageId, setShownImageId] = useState('');
   const [images, setImages] = useState<PhotoOfTheDay[] | null>(null);
 
   useEffect(() => {
     // const params = { date: '2025-01-01' };
-    const params = { start_date: '2025-01-01', end_date: '2025-01-02' };
+    let params = {};
+    let url;
 
-    const photosRequest = cancellableRequestGet(`${backend_url}/api/photo-of-the-day`, params);
+    if (type === 'POTD') {
+      url = `/api/photo-of-the-day`;
+      params = { start_date: '2025-01-01', end_date: '2025-01-07' };
+    } else if (type === 'MarsPhotos') {
+      url = `/api/mars-photos`;
+      params = {};
+    } else {
+      Promise.reject({ message: 'no type specified' });
+      return;
+    }
+
+    const photosRequest = cancellableRequestGet(url, params);
 
     photosRequest
       .then((response) => {
