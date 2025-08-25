@@ -21,9 +21,6 @@ export default {
     },
     preview: {
       allowedHost: ['nasa-vis-ui.onrender.com'],
-      proxy: {
-        [process.env.VITE_API_PREFIX ?? '/api']: new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin,
-      }
     },
     server: {
       allowedHosts: ['nasa-vis-ui.onrender.com'],

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { type PhotoOfTheDay } from '@/common/types/photoOfTheDay.d';
 // import { type cancellableRequestClassType } from '@/common/types/cancellableRequests';
 import { cancellableRequestGet } from '@/common/utils/requestsCore';
+const backend_url = import.meta.env.VITE_BACKEND_URL
+
 
 export function useHooks() {
   const [shownImageId, setShownImageId] = useState('');
@@ -11,7 +13,7 @@ export function useHooks() {
     // const params = { date: '2025-01-01' };
     const params = { start_date: '2025-01-01', end_date: '2025-01-02' };
 
-    const photosRequest = cancellableRequestGet('/api/photo-of-the-day', params);
+    const photosRequest = cancellableRequestGet(`${backend_url}/api/photo-of-the-day`, params);
 
     photosRequest
       .then((response) => {
