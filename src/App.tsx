@@ -2,8 +2,8 @@ import MainNav from '@/components/main-nav/MainNav';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
 import MainContent from '@/components/main-content/MainContent';
-import ImageCarousel from '@/components/image-carousel/imageCarousel';
-import PhotoOfTheDay from '@/components/photo-of-the-day/photo-of-the-day';
+import PhotoOfTheDay from '@/components/planet-views/photo-of-the-day/photo-of-the-day';
+import MarsPhotos from '@/components/planet-views/mars/mars-photos';
 // import Modal from '@/components/modal/modal';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <MainContent>
           <>
             {(currentRoute === 'POTD' || currentRoute === '') && <PhotoOfTheDay />}
-            {currentRoute === 'mars' && <ImageCarousel photoType="MarsPhotos" sizeType="preview" />}
+            {currentRoute === 'mars' && <MarsPhotos />}
             {/* <Modal />
             <button /> */}
             {/* <ImageCarousel sizeType="fullsize" /> */}

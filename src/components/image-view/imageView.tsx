@@ -1,14 +1,14 @@
 import type { JSX } from 'react';
 import './style.scss';
 
-interface ImageType {
+interface imageViewProps {
   className?: string;
   src?: string;
   alt?: string;
   sizeType?: 'fullsize' | 'preview';
 }
 
-export default function ImageView({ className = '', src, alt, sizeType = 'preview' }: ImageType): JSX.Element {
+export default function ImageView({ className = '', src, alt, sizeType = 'preview' }: imageViewProps): JSX.Element {
   const sizeClass = `size-${sizeType}`;
 
   return (

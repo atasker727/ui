@@ -23,7 +23,7 @@
       overflow-y: scroll;
     }
 
-    &:is(.nav-expanded) {
+    &:has(.nav-expanded) {
       .main-content {
         width: $body-width-min;
       }
@@ -33,7 +33,7 @@
       }
     }
 
-    &:is(.nav-collapsed) {
+    &:has(.nav-collapsed) {
       .main-content {
         width: $body-width-max;
       }

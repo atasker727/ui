@@ -1,25 +1,32 @@
 import type { JSX } from 'react';
 import './style.scss';
 
-import ImageView from '../image-view/imageView';
-import { useHooks } from './imageCarousel.hooks.tsx';
-import nextId from 'react-id-generator';
-import type { ALLOWED_PHOTO_TYPES } from '@/common/types/photoTypes.js';
+import ImageView from '@/components/image-view/imageView';
+import { useEffect, useState } from 'react';
 
-export default function ImageCarousel({
-  photoType,
-  sizeType,
-  onImageClick,
-}: {
+import nextId from 'react-id-generator';
+
+import type { ALLOWED_PHOTO_TYPES, MarsPhoto, PhotoOfTheDay } from '@/common/types/photoTypes.js';
+
+interface imageCarouselProps {
+  images: PhotoOfTheDay[] | MarsPhoto[];
   className?: string;
   photoType: ALLOWED_PHOTO_TYPES;
   sizeType: 'fullsize' | 'preview';
-  onImageClick?: (image: unknown) => void;
-}): JSX.Element {
+  onImageClick?: (image: PhotoOfTheDay | MarsPhoto | null) => void;
+}
+
+export default function ImageCarousel({ images, sizeType, onImageClick }: imageCarouselProps): JSX.Element {
   const sizeClass = sizeType === 'preview' ? 'image-carousel-container--preview' : 'image-carousel-container--fullsize';
 
   const carouselId = nextId('carousel-');
-  const { shownImageId, setShownImageId, images } = useHooks(photoType);
+  const [shownImageId, setShownImageId] = useState<string | number | null>(images?.[0]?.id || null);
+
+  useEffect(() => {
+    if (!shownImageId) {
+      setShownImageId(images?.[0].id);
+    }
+  }, [images]);
 
   const handleCarouselClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -31,7 +38,7 @@ export default function ImageCarousel({
 
       showNewImage(direction);
     } else if (target?.getAttribute('data-element-type') === 'image') {
-      onImageClick?.(images?.find(({ id }) => id === shownImageId));
+      onImageClick?.(images?.find(({ id }) => id === shownImageId) || null);
     }
   };
 
