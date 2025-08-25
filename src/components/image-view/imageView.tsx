@@ -14,6 +14,7 @@ export default function ImageView({ className = '', src, alt, sizeType = 'previe
   return (
     <div className={`image-view-container d-flex ${sizeClass} ${className}`}>
       <img
+        data-element-type="image"
         src={src || 'https://apod.nasa.gov/apod/image/2508/NGC6872_block1024.jpg'}
         alt={(alt && src) || 'Giant Galaxies in Pavo'}
       />

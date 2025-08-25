@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { PhotoOfTheDay, ALLOWED_PHOTO_TYPES } from '@/common/types/photoTypes';
 import { cancellableRequestGet } from '@/common/utils/requestsCore';
-// const backend_url = import.meta.env.VITE_BACKEND_URL
-// console.log(import.meta);
 
 export function useHooks(type: ALLOWED_PHOTO_TYPES) {
-  const [shownImageId, setShownImageId] = useState('');
+  const [shownImageId, setShownImageId] = useState<string | number>();
   const [images, setImages] = useState<PhotoOfTheDay[] | null>(null);
 
   useEffect(() => {
@@ -31,13 +29,13 @@ export function useHooks(type: ALLOWED_PHOTO_TYPES) {
         const typedResponse = response as { photos: PhotoOfTheDay[] };
         if (typedResponse && typedResponse.photos) {
           setImages(typedResponse.photos);
-          setShownImageId(typedResponse.photos[0].imageURL);
+          setShownImageId(typedResponse.photos[0].id);
         }
       })
       .catch(console.error);
 
     return () => photosRequest.cancelRequest('component unmounted');
-  }, []);
+  }, [type]);
 
   return { shownImageId, setShownImageId, images };
 }

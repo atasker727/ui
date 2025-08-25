@@ -9,17 +9,19 @@ import type { ALLOWED_PHOTO_TYPES } from '@/common/types/photoTypes.js';
 export default function ImageCarousel({
   photoType,
   sizeType,
+  onImageClick,
 }: {
   className?: string;
   photoType: ALLOWED_PHOTO_TYPES;
   sizeType: 'fullsize' | 'preview';
+  onImageClick?: (image: unknown) => void;
 }): JSX.Element {
   const sizeClass = sizeType === 'preview' ? 'image-carousel-container--preview' : 'image-carousel-container--fullsize';
 
   const carouselId = nextId('carousel-');
   const { shownImageId, setShownImageId, images } = useHooks(photoType);
 
-  const handleCarouselArrowClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleCarouselClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
 
     if (target?.id === carouselId) {
@@ -28,6 +30,8 @@ export default function ImageCarousel({
       const direction = e.clientX < left + width / 2 ? 'left' : 'right';
 
       showNewImage(direction);
+    } else if (target?.getAttribute('data-element-type') === 'image') {
+      onImageClick?.(images?.find(({ id }) => id === shownImageId));
     }
   };
 
@@ -35,7 +39,7 @@ export default function ImageCarousel({
     if (images === null) return;
 
     let newIndex = 0;
-    const oldIndex = images.findIndex(({ imageURL }) => shownImageId === imageURL);
+    const oldIndex = images.findIndex(({ id }) => shownImageId === id);
 
     if (direction === 'right') {
       newIndex = (oldIndex + 1) % images.length;
@@ -43,18 +47,17 @@ export default function ImageCarousel({
       newIndex = (oldIndex - 1 + images.length) % images.length;
     }
 
-    setShownImageId(images[newIndex].imageURL);
+    setShownImageId(images[newIndex].id);
   };
 
   return (
-    <div id={carouselId} className={`image-carousel-container d-flex ${sizeClass}`} onClick={handleCarouselArrowClick}>
-      {images?.map((src) => (
+    <div id={carouselId} className={`image-carousel-container d-flex ${sizeClass}`} onClick={handleCarouselClick}>
+      {images?.map((image) => (
         <ImageView
-          key={src.imageURL}
-          src={src.imageURL}
+          key={image.id}
+          src={image.imageURL}
           sizeType={sizeType}
-          className={shownImageId === src.imageURL ? 'image--visible' : 'image--hidden'}
-          // onClick={() => setShownImageId(idx)}
+          className={shownImageId === image.id ? 'image--visible' : 'image--hidden'}
         />
       ))}
     </div>

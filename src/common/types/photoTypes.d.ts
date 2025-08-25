@@ -1,6 +1,7 @@
 export interface PhotoGeneric {
   imageURL: string;
   title: string;
+  id: string | number;
 }
 
 export interface PhotoOfTheDayResponse {
