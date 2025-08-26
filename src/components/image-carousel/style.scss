@@ -22,6 +22,32 @@ $carousel-button-right-offset: calc($carousel-button-size-external * 2) + $carou
 
   .image--visible {
     display: block;
+    cursor: pointer;
+    img {
+      opacity: 1;
+      filter: none;
+      transform: scale(1);
+      transition:
+        opacity 300ms ease,
+        filter 300ms ease,
+        transform 300ms ease;
+      will-change: opacity, filter, transform;
+    }
+  }
+  .image--part-visible {
+    display: block;
+    opacity: 0.6;
+    filter: grayscale(20%);
+    img {
+      opacity: 0.6;
+      filter: grayscale(20%);
+      transform: scale(0.98);
+      transition:
+        opacity 300ms ease,
+        filter 300ms ease,
+        transform 300ms ease;
+      will-change: opacity, filter, transform;
+    }
   }
   .image--hidden {
     display: none;

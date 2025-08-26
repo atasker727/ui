@@ -41,13 +41,7 @@ export default function PhotoOfTheDay() {
   return (
     <>
       <ImageCarousel images={images} sizeType="preview" photoType={photoType} onImageClick={onImageClick} />
-      {fullSizeImage && (
-        <ImageView
-          sizeType="fullsize"
-          key={fullSizeImage.id}
-          src={fullSizeImage.imageURL}
-        />
-      )}
+      {fullSizeImage && <ImageView sizeType="fullsize" key={fullSizeImage.id} src={fullSizeImage.imageURL} />}
     </>
   );
 }

@@ -1,0 +1,63 @@
+@use '@/styles/colors' as colors;
+@use '@/styles/z-indexes' as z;
+
+.toast {
+  &-container {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: z.$elevation-modal + 1;
+    width: min(max-content, 80%);
+    max-width: 70%;
+    border-radius: 6px;
+    padding: 4px 8px;
+    align-items: baseline;
+
+    &:is(.toast-show) {
+      display: flex;
+    }
+    &:is(.toast-hide) {
+      display: none;
+    }
+
+    &,
+    .toast-close-button {
+      height: fit-content;
+      color: colors.$text-color-light;
+      background-color: colors.$dark-grey;
+    }
+
+    &.toast--default {
+      &,
+      & .toast-close-button {
+        background-color: colors.$dark-grey;
+      }
+    }
+
+    &.toast--success {
+      &,
+      & .toast-close-button {
+        background-color: colors.$success-color;
+      }
+    }
+
+    &.toast--error {
+      &,
+      & .toast-close-button {
+        background-color: colors.$error-color;
+      }
+    }
+  }
+
+  &-content {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    margin-right: 2%;
+  }
+
+  &-close-button {
+    border: 1px solid colors.$text-color-light;
+    border-radius: 2px;
+    margin-left: 4px;
+  }
+}

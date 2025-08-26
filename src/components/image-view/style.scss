@@ -1,15 +1,42 @@
 @use '@/styles/image-sizes' as sizes;
+@use '@/styles/colors' as colors;
 
 $carousel-button-size: 28px;
 $carousel-button-x-offset: $carousel-button-size + 16px;
 
 .image-view-container {
-  &.size-preview img {
-    height: sizes.$preview-height;
-    width: sizes.$preview-width;
+  &:is(.size-preview) {
+    img,
+    .image-loading {
+      height: sizes.$preview-height;
+      width: sizes.$preview-width;
+    }
   }
-  &.size-fullsize img {
-    height: sizes.$fullsize-height;
-    width: sizes.$fullsize-width;
+  &:is(.size-fullsize) {
+    img,
+    .image-loading {
+      height: sizes.$fullsize-height;
+      width: sizes.$fullsize-width;
+    }
+  }
+
+  .image-loading {
+    @keyframes image-loading-pulse {
+      0% {
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.4;
+      }
+    }
+    border-radius: 2%;
+    color: colors.$light-grey;
+    background-color: colors.$bg-dark-grey;
+    text-align: center;
+    align-content: center;
+    animation: image-loading-pulse 2.4s ease-in-out infinite;
   }
 }
