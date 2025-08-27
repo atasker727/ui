@@ -55,6 +55,14 @@ $carousel-button-right-offset: calc($carousel-button-size-external * 2) + $carou
     transform: translateX(-$carousel-button-size-external);
   }
 
+  &:not(:has(.image--visible)) {
+    .image-view-container:first-child {
+      display: block;
+      opacity: 1;
+      filter: unset;
+    }
+  }
+
   &::before,
   &::after {
     z-index: 1;
