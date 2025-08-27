@@ -1,13 +1,13 @@
-import ImageCarousel from '@/components/image-carousel/imageCarousel';
-import ImageView from '@/components/image-view/imageView';
-import Toast from '@/components/toast/Toast';
+import type { JSX } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import './style.scss';
+
 import { cancellableRequestGet } from '@/common/utils/requestsCore';
 import type { PhotoOfTheDay } from '@/common/types/photoTypes';
 import type { cancellableRequestClassType } from '@/common/types/cancellableRequests';
-import type { JSX } from 'react';
-
-import { useState, useEffect, useRef } from 'react';
-import './style.scss';
+import ImageCarousel from '@/components/image-carousel/imageCarousel';
+import ImageView from '@/components/image-view/imageView';
+import Toast from '@/components/toast/Toast';
 import DateRange, { type DateRangeValue } from '@/components/date-range/DateRange';
 
 export default function PhotoOfTheDay(): JSX.Element {
@@ -21,7 +21,9 @@ export default function PhotoOfTheDay(): JSX.Element {
   const [isDateRangeValid, setIsDateRangeValid] = useState(true);
   const activeRequestRef = useRef<cancellableRequestClassType | null>(null);
 
-  function fetchPhotosOfTheDay(startDate: string, endDate: string) {
+  useEffect(() => {
+    if (!isDateRangeValid) return;
+    if (activeRequestRef.current) activeRequestRef.current.cancelRequest();
     if (activeRequestRef.current) {
       try {
         activeRequestRef.current.cancelRequest('superseded by new request');
@@ -31,7 +33,7 @@ export default function PhotoOfTheDay(): JSX.Element {
     }
 
     const url = `/api/photo-of-the-day`;
-    const params = { start_date: startDate, end_date: endDate };
+    const params = { start_date: dateRange.startDate, end_date: dateRange.endDate };
 
     const photosRequest = cancellableRequestGet(url, params);
     activeRequestRef.current = photosRequest;
@@ -56,16 +58,8 @@ export default function PhotoOfTheDay(): JSX.Element {
         activeRequestRef.current = null;
       });
 
-    return photosRequest;
-  }
-
-  useEffect(() => {
-    if (activeRequestRef.current) activeRequestRef.current.cancelRequest();
-    const req = fetchPhotosOfTheDay(dateRange.startDate, dateRange.endDate);
-    activeRequestRef.current = req;
-
-    return () => req.cancelRequest('component unmounted');
-  }, []);
+    return () => photosRequest.cancelRequest('component unmounted');
+  }, [dateRange, isDateRangeValid]);
 
   return (
     <>
@@ -73,13 +67,6 @@ export default function PhotoOfTheDay(): JSX.Element {
         <ImageCarousel images={images} sizeType="preview" photoType={photoType} onImageClick={setFullSizeImage} />
         <div className="search-controls">
           <DateRange value={dateRange} onChange={setDateRange} onValidityChange={setIsDateRangeValid} />
-          <button
-            className="search-button"
-            disabled={!isDateRangeValid}
-            onClick={() => fetchPhotosOfTheDay(dateRange.startDate, dateRange.endDate)}
-          >
-            search
-          </button>
         </div>
       </div>
       {fullSizeImage && (
