@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "start": "vite --host",
+    "build": "tsc --build && vite build",
+    "start": "vite",
     "test": "vitest",
     "lint": "eslint .",
     "lint-fix": "prettier --write src/**/*.{tsx,ts,scss} && eslint src/**/*.{tsx,ts}",
