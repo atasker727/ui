@@ -20,16 +20,16 @@ export default {
       },
     },
     build: {
-      allowedHosts: [process.env.VITE_HOST_URL],
-      allowedHost: [process.env.VITE_HOST_URL],
+      allowedHosts: true,
+      allowedHost: true,
       proxy: {
         [process.env.VITE_API_PREFIX ?? '/api']: new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin,
       },
       changeOrigin: true
     },
     preview: {
-      allowedHosts: [process.env.VITE_HOST_URL],
-      allowedHost: [process.env.VITE_HOST_URL],
+      allowedHosts: true,
+      allowedHost: true,
       proxy: {
         [process.env.VITE_API_PREFIX ?? '/api']: new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin,
       },
