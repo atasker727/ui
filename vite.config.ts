@@ -36,9 +36,12 @@ export default {
       changeOrigin: true
     },
     server: {
+      allowedHosts: true,
+      allowedHost: true,
       port: process.env.VITE_APP_PORT,
       proxy: {
         [process.env.VITE_API_PREFIX ?? '/api']: new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin,
       },
+      changeOrigin: true
     },
 };
