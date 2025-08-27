@@ -3,8 +3,6 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import sass from 'sass'
 
-console.log('attempting proxy config:', [process.env.VITE_API_PREFIX ?? '/api'], ':', new URL(process.env.VITE_BACKEND_URL ?? 'http://localhost:3000').origin);
-
 export default {
     plugins: [react()],
     resolve: {

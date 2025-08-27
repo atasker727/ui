@@ -4,7 +4,6 @@ import Footer from '@/components/footer/Footer';
 import MainContent from '@/components/main-content/MainContent';
 import PhotoOfTheDay from '@/components/planet-views/photo-of-the-day/photo-of-the-day';
 import MarsPhotos from '@/components/planet-views/mars/mars-photos';
-// import Modal from '@/components/modal/modal';
 
 function App() {
   const currentRoute = window.location.pathname.slice(1);
@@ -17,9 +16,6 @@ function App() {
           <>
             {(currentRoute === 'POTD' || currentRoute === '') && <PhotoOfTheDay />}
             {currentRoute === 'mars' && <MarsPhotos />}
-            {/* <Modal />
-            <button /> */}
-            {/* <ImageCarousel sizeType="fullsize" /> */}
           </>
         </MainContent>
       </div>
