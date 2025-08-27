@@ -5,11 +5,12 @@
   .application-header {
     height: $header-height;
 
-    background-color: $bg-blue-grey;
+    background-color: $text-color-dark;
     text-align: center;
-
+    
     &-title {
       margin: auto;
+      align-content: center;
     }
   }
 
