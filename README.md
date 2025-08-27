@@ -41,6 +41,7 @@ pnpm preview
 The UI expects the API to be reachable at the relative path `/api`. In development, the Vite dev server proxies requests to the API server if configured. Make sure the API is running (see `../api/README.md`).
 
 set env vars VITE_BACKEND_URL & VITE_API_PREFIX for production api address, otherwise use port 3000 & localhost for development
+set env var VITE_HOST_URL for allowed host in production
 
 - Photo of the Day endpoint: `GET /api/photo-of-the-day?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD`
 - Mars photos endpoint: `GET /api/mars-photos?sol=NUMBER&camera=FHAZ|RHAZ|MAST|CHEMCAM|MAHLI|MARDI|NAVCAM`
