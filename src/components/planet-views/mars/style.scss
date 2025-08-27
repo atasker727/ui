@@ -1,0 +1,83 @@
+.action-bar {
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  &,
+  & .search-controls {
+    display: flex;
+  }
+}
+
+.mars-photos__label {
+  font-weight: 600;
+  margin-right: 8px;
+  color: #333;
+  font-size: 0.9rem;
+  align-content: center;
+  margin-left: 8px;
+}
+
+.mars-photos__input,
+.mars-photos__select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  font-size: 0.9rem;
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+  }
+}
+
+.mars-photos__input {
+  width: 120px;
+}
+
+.mars-photos__select {
+  min-width: 100px;
+}
+
+.mars-fullsize-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 2rem 0;
+
+  .image-view-container {
+    width: 100%;
+    max-width: 100%;
+
+    &.size-fullsize {
+      img,
+      .image-loading {
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      }
+
+      .image-loading {
+        aspect-ratio: 4/3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .image-view-container.size-fullsize {
+      img,
+      .image-loading {
+        max-height: 60vh;
+      }
+    }
+  }
+}
