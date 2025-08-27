@@ -80,11 +80,15 @@ export default function ImageCarousel({ images, sizeType, onImageClick }: imageC
   };
 
   return (
-    <div id={carouselId} className={`image-carousel-container d-flex ${sizeClass}`} onClick={handleCarouselClick}>
-      {images?.map((image) => (
-        <ImageView key={image.id} src={image.imageURL} sizeType={sizeType} className={getImageClass(image.id)} />
-      ))}
+    <>
       {images?.length === 0 && <div>nothing found</div>}
-    </div>
+      {images?.length && images.length > 0 && (
+        <div id={carouselId} className={`image-carousel-container d-flex ${sizeClass}`} onClick={handleCarouselClick}>
+          {images?.map((image) => (
+            <ImageView key={image.id} src={image.imageURL} sizeType={sizeType} className={getImageClass(image.id)} />
+          ))}
+        </div>
+      )}
+    </>
   );
 }

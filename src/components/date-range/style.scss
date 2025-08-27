@@ -1,0 +1,40 @@
+.date-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &__field {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__label {
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  &__input {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  &__separator {
+    color: #9ca3af;
+    user-select: none;
+  }
+
+  &__error {
+    margin-left: 8px;
+    font-size: 0.85rem;
+    color: #b91c1c;
+  }
+
+  &[data-valid='false'] .date-range__input {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+}

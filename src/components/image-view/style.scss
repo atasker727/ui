@@ -15,12 +15,19 @@ $carousel-button-x-offset: $carousel-button-size + 16px;
   &:is(.size-fullsize) {
     img,
     .image-loading {
-      height: sizes.$fullsize-height;
-      width: sizes.$fullsize-width;
+      height: 100%;
+      width: 100%;
     }
   }
 
   .image-loading {
+    border-radius: 2%;
+    color: colors.$light-grey;
+    background-color: colors.$bg-dark-grey;
+    text-align: center;
+    align-content: center;
+    animation: image-loading-pulse 2.4s ease-in-out infinite;
+
     @keyframes image-loading-pulse {
       0% {
         opacity: 0.4;
@@ -32,11 +39,5 @@ $carousel-button-x-offset: $carousel-button-size + 16px;
         opacity: 0.4;
       }
     }
-    border-radius: 2%;
-    color: colors.$light-grey;
-    background-color: colors.$bg-dark-grey;
-    text-align: center;
-    align-content: center;
-    animation: image-loading-pulse 2.4s ease-in-out infinite;
   }
 }

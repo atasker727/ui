@@ -9,10 +9,9 @@ $carousel-button-left-offset: $carousel-button-offset;
 $carousel-button-right-offset: calc($carousel-button-size-external * 2) + $carousel-button-offset;
 
 .image-carousel-container {
-  // z-index: -1;;
   &--preview {
     height: sizes.$preview-height;
-    width: sizes.$preview-width;
+    width: calc(sizes.$preview-width * 3);
   }
 
   &--fullsize {
